@@ -1,0 +1,76 @@
+{{>layout/header}}
+
+
+    <div class="row rowLine">
+        <div class="col">bootstrap test</div>
+    </div>
+
+    <!--
+        3-11.
+        구글 인증정보를 이용해 로그인이 된 경우와 안된 경우를 구분해서 화면을 구성
+        로그인이 된 경우 : [구글 로그인] 버튼을 하나 만들고
+        로그인이 안된 경우 : [OOO 로그아웃] 버튼을 만든다.
+
+        /logout은 우리가 관여하는 코드가 아니고 oauth2에서 자동으로 로그아웃 시켜주는 영역
+        /oauth2/authorization/google도 로그아웃과 마찬가지고 스프링 시큐리티에서 기본으로 제공해주는 영역이어서
+        별도로 Controller를 만들지 않는다.
+
+        /domain/user 패키지
+            Role, User, UserRepository
+    -->
+
+    <div class="row rowLine">
+        <div class="col">
+            <button class="btn btn-primary" onclick="location.href='/posts/save'"><span class="material-icons">mode_edit</span> 글쓰기</button>
+        </div>
+        <div class="col text-right">
+            {{#userName}}
+                <button type="button" class="btn btn-success" onClick="location.href='/logout' "> {{userName}} 로그아웃</button>
+            {{/userName}}
+            {{^userName}}
+                <button type="button" class="btn btn-primary" onClick="location.href='/oauth2/authorization/google'">Google Login</button>
+            {{/userName}}
+        </div>
+    </div>
+    <!--
+        3-5. 글 목록보기
+        글쓰기가 성공한 후, 첫화면으로 돌아오니까
+        화면 하단에 현재까지 등록된 글의 목록을 보여주는 부분을 작성한다.
+
+        [화면구성]
+        번호     제목                 작성자                 수정일
+        1       test                tester                2021-08-26
+        2       test2               tester2               2021-08-26
+
+        #posts : Collection List를 for(), while()처럼 출력해준다.
+        정확히는 posts라는 List 순회한다는 것을 의미한다.
+        아직은 posts를 만들지 않음 = 목록을 보여주지 못함.
+
+        title에 링크를 걸어줄 예정
+         ㄴ /posts/update/아이디
+    -->
+
+    <div class="row rowLine">
+        <div class="col-1">번호</div>
+        <div class="col-6">제목</div>
+        <div class="col-2">작성자</div>
+        <div class="col-3">수정일</div>
+    </div>
+
+    <!--
+       title을 클릭했을 때 원본글을 가지고와서 내용을 보여주는 작업 필요,
+       시간 관계상, 바로 글 수정으로 감.
+       수정: 내용보기와 같다 = 원본 데이터를 가져와서 화면에 보여주는 작업이기 때문
+       원본글을 가져오기 위해서는 id가 있어야함.
+    -->
+
+    {{#posts}}
+        <div class="row rowLine">
+            <div class="col-1">{{id}}</div>
+            <div class="col-6"><a href="/posts/update/{{id}}">{{title}}</a></div>
+            <div class="col-2">{{author}}</div>
+            <div class="col-3">{{modifiedDate}}</div>
+        </div>
+    {{/posts}}
+
+{{>layout/footer}}

@@ -1,0 +1,45 @@
+{{>layout/header}}
+
+<!--
+    글쓰기
+    <form>
+        제목 : [_________]
+        작성자 : [__________]
+        내용 : [_________textarea________]
+    </form>
+-->
+
+    <div class="row rowLine">
+        <div class="col">
+            <h4 class="text-primary">글쓰기</h4>
+        </div>
+    </div>
+
+    <form>
+        <div class="row rowLine">
+            <div class="col-3">제목</div>
+            <div class="col-9 col-md-10">
+                <input type="text" name="title" id="title" placeholder="제목" required class="form-control">
+            </div>
+        </div>
+        <div class="row rowLine">
+            <div class="col-3">작성자</div>
+            <div class="col-9 col-md-10">
+                <input type="text" name="author" id="author" placeholder="작성자" required class="form-control">
+            </div>
+        </div>
+        <div class="row rowLine">
+            <div class="col-3">내용</div>
+            <div class="col-9 col-md-10">
+                <textarea name="content" id="content" placeholder="내용" rows="15" required class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row rowLine">
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary" id="btn-save">완료</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/'">목록</button>
+            </div>
+        </div>
+    </form>
+
+{{>layout/footer}}
